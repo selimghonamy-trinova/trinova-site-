@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Trinova</title>
+<meta name="description" content="Tell Trinova how your floor works — we'll tell you what a system built around it would look like.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-nav">
+  <div class="wrap">
+    <a href="index.html" class="wordmark"><b>tri</b><i>nova</i></a>
+    <nav class="nav-links" id="nav-links">
+      <div class="has-dropdown">
+        <a href="index.html#sectors">Sectors</a>
+        <div class="dropdown">
+          <a href="fabricated-metals.html">Fabricated Metals</a>
+          <a href="index.html#sectors">Food &amp; Beverage</a>
+          <a href="index.html#sectors">Textiles &amp; Garments</a>
+          <a href="index.html#sectors">Pharma &amp; Plastics-Packaging</a>
+          <a href="index.html#sectors">Warehouse / Distribution / 3PL</a>
+        </div>
+      </div>
+      <a href="index.html#modules">What we build</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="nav-cta">Talk to us</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="index.html">Home</a> / Contact</div>
+      <h1>Tell us how your floor actually works.</h1>
+      <p class="sub">We'll tell you what a system built around it would look like — and where to start. No pitch deck first, just a conversation about your process.</p>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="wrap two-col">
+      <form id="contact-form" class="form-panel">
+        <div class="form-row">
+          <label for="name">Full name</label>
+          <input id="name" name="name" type="text" required>
+        </div>
+        <div class="form-row">
+          <label for="company">Company</label>
+          <input id="company" name="company" type="text" required>
+        </div>
+        <div class="form-row">
+          <label for="email">Work email</label>
+          <input id="email" name="email" type="email" required>
+        </div>
+        <div class="form-row">
+          <label for="sector">Sector</label>
+          <select id="sector" name="sector">
+            <option>Fabricated Metals</option>
+            <option>Food &amp; Beverage</option>
+            <option>Textiles &amp; Garments</option>
+            <option>Pharma &amp; Plastics-Packaging</option>
+            <option>Warehouse / Distribution / 3PL</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="message">What's the biggest gap on your floor right now?</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-arrow">Send</button>
+        <p style="margin-top:14px;font-size:12.5px;color:var(--slate);">Opens your email client, addressed to hello@trinovax.co. Nothing is sent automatically.</p>
+      </form>
+
+      <div>
+        <div class="eyebrow">Direct</div>
+        <h2 style="font-size:24px;">Prefer to write directly?</h2>
+        <p style="margin-top:14px;color:var(--slate);font-size:15.5px;">
+          Email <a href="mailto:hello@trinovax.co" style="color:var(--forest-teal);">hello@trinovax.co</a> and we'll reply within one business day.
+        </p>
+        <div style="margin-top:32px;">
+          <h5 style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);">Based in</h5>
+          <p style="margin-top:8px;font-size:15px;">Cairo, Egypt — serving 10th of Ramadan, 6th of October, and Greater Cairo industrial zones.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="index.html" class="wordmark"><b>tri</b><i>nova</i></a>
+        <p style="margin-top:14px;color:var(--slate);font-size:14px;max-width:32ch;">Industrial operational technology solutions for Egyptian manufacturers and warehouse/distribution operators.</p>
+      </div>
+      <div>
+        <h5>Product</h5>
+        <a href="index.html#modules">What we build</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#sectors">Sectors</a>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div>
+        <h5>Sectors</h5>
+        <a href="fabricated-metals.html">Fabricated Metals</a>
+        <a href="index.html#sectors">Food &amp; Beverage</a>
+        <a href="index.html#sectors">Textiles &amp; Garments</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span data-year></span> Trinova. Industrial Operational Technology Solutions.</span>
+      <span>Cairo, Egypt</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+</body>
+</html>
