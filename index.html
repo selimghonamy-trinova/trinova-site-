@@ -13,6 +13,7 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-nav">
+  <div class="scroll-progress"></div>
   <div class="wrap">
     <a href="index.html" class="wordmark"><b>tri</b><i>nova</i></a>
     <nav class="nav-links" id="nav-links">
@@ -72,21 +73,101 @@
         <div class="eyebrow">The gap we build for</div>
         <h2>Most factories aren't short on data. They're short on a system.</h2>
       </div>
-      <div class="problem-grid">
-        <div class="problem-card">
+      <div class="problem-grid" data-reveal-group>
+        <div class="problem-card glow-card" data-reveal>
           <div class="k">PRODUCTION</div>
           <p>Output is reported after the fact, by hand, if at all.</p>
           <p class="small">By the time a number reaches you, the shift that made it is already over.</p>
         </div>
-        <div class="problem-card">
+        <div class="problem-card glow-card" data-reveal>
           <div class="k">INVENTORY</div>
           <p>Stock on paper and stock on the shelf rarely agree.</p>
           <p class="small">The gap only shows up at the next physical count — after it's already cost you.</p>
         </div>
-        <div class="problem-card">
+        <div class="problem-card glow-card" data-reveal>
           <div class="k">COST</div>
           <p>You find out if a job was profitable after it's shipped.</p>
           <p class="small">Material, machine time, and rework are rarely tied back to the job that used them.</p>
+        </div>
+      </div>
+
+      <div class="chaos-order" data-reveal-group>
+        <div class="chaos-panel" data-reveal>
+          <span class="lbl">Before — how it usually runs</span>
+          <span class="chaos-item">Notebook count</span>
+          <span class="chaos-item">WhatsApp update</span>
+          <span class="chaos-item">Yesterday's total</span>
+          <span class="chaos-item">Verbal handoff</span>
+          <span class="chaos-item">Paper QC form</span>
+          <span class="chaos-item">Stock guess</span>
+        </div>
+        <div class="arrow" data-reveal>→</div>
+        <div class="order-panel" data-reveal>
+          <span class="lbl">With Trinova</span>
+          <div class="order-row"><span class="dot"></span>Stage 01 — logged at source, timestamped</div>
+          <div class="order-row"><span class="dot"></span>Stage 02 — auto-forwarded, no re-entry</div>
+          <div class="order-row"><span class="dot"></span>Stage 03 — visible on the dashboard live</div>
+          <div class="order-row"><span class="dot"></span>Stage 04 — tied to batch and operator</div>
+          <div class="order-row"><span class="dot"></span>Stage 05 — reconciled automatically</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIAGNOSTIC TOOL -->
+  <section class="band-deep">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Where should you start?</div>
+        <h2>60-second diagnostic. Same conversation we'd have on a call.</h2>
+        <p style="color:rgba(255,255,255,.68);">Answer three questions and we'll point you to the module that typically fits first — no sales call required to find out.</p>
+      </div>
+      <div class="diagnostic" data-reveal>
+        <div class="diagnostic-head">
+          <div class="diag-progress"><span></span><span></span><span></span></div>
+        </div>
+        <div class="diagnostic-body">
+
+          <div class="diag-step active" data-key="sector">
+            <div class="diag-question">What does your operation run?</div>
+            <div class="diag-options">
+              <button class="diag-option" data-value="fabricated-metals">Fabricated metals / job-shop production</button>
+              <button class="diag-option" data-value="food-beverage">Food &amp; beverage production</button>
+              <button class="diag-option" data-value="textiles">Textiles &amp; garment manufacturing</button>
+              <button class="diag-option" data-value="pharma-plastics">Pharma or plastics-packaging</button>
+              <button class="diag-option" data-value="warehouse">Warehouse, distribution, or 3PL</button>
+            </div>
+          </div>
+
+          <div class="diag-step" data-key="gap">
+            <div class="diag-question">What's the biggest gap right now?</div>
+            <div class="diag-options">
+              <button class="diag-option" data-value="cost">We don't know real cost or output until later</button>
+              <button class="diag-option" data-value="stock">Stock on paper doesn't match the shelf</button>
+              <button class="diag-option" data-value="traceability">We can't trace a batch or defect back to its source</button>
+              <button class="diag-option" data-value="downtime">Equipment downtime has no record or pattern</button>
+            </div>
+          </div>
+
+          <div class="diag-step" data-key="size">
+            <div class="diag-question">Roughly how many people work the floor?</div>
+            <div class="diag-options">
+              <button class="diag-option" data-value="small">Under 30</button>
+              <button class="diag-option" data-value="mid">30–150</button>
+              <button class="diag-option" data-value="large">150+</button>
+              <button class="diag-option" data-value="unsure">Not sure / varies</button>
+            </div>
+          </div>
+
+          <div class="diag-step diag-result">
+            <div class="eyebrow">Your recommended starting point</div>
+            <h3 class="diag-result-title">—</h3>
+            <p class="diag-result-body">—</p>
+            <a href="#" class="btn btn-primary btn-arrow diag-result-link">See sector page</a>
+            <a href="contact.html" class="btn btn-ghost diag-result-contact">Talk to us about this</a>
+            <button class="diag-restart">Start over</button>
+          </div>
+
         </div>
       </div>
     </div>
@@ -100,20 +181,20 @@
         <h2>Built for your factory. Not configured around one.</h2>
         <p>We don't sell a platform and ask you to adapt to it. We build the system around your actual production stages, your actual materials, your actual paperwork trail — then stay in it with you.</p>
       </div>
-      <div class="diff-grid">
-        <div class="diff-item">
+      <div class="diff-grid" data-reveal-group>
+        <div class="diff-item" data-reveal>
           <h4>Tailored, not templated</h4>
           <p>Built around your process, your terminology, your exceptions — not a module list you adapt to.</p>
         </div>
-        <div class="diff-item">
+        <div class="diff-item" data-reveal>
           <h4>Priced between the poles</h4>
           <p>Cheaper and faster than enterprise ERP, more customized than commodity ERP.</p>
         </div>
-        <div class="diff-item">
+        <div class="diff-item" data-reveal>
           <h4>Licensed, not handed over</h4>
           <p>We're paid to keep the system working, not just to deliver and leave. Annual license, continuous support.</p>
         </div>
-        <div class="diff-item">
+        <div class="diff-item" data-reveal>
           <h4>A small team that stays close</h4>
           <p>You work directly with the people who built your system — not a support queue.</p>
         </div>
@@ -127,16 +208,30 @@
       <div class="section-head">
         <div class="eyebrow">What we build</div>
         <h2>Seven standalone systems. Start with the one that hurts most.</h2>
-        <p>Every module works on its own and connects with the others as you add them. We diagnose your floor first, then recommend an entry point — never a bundle you didn't ask for.</p>
+        <p>Every module works on its own and connects with the others as you add them. We diagnose your floor first, then recommend an entry point — never a bundle you didn't ask for. Click a module for more detail.</p>
       </div>
       <div class="module-list">
-        <div class="module-row"><div class="idx">01</div><h4>Manufacturing Execution System</h4><div class="desc">Stage-by-stage production tracking, from raw material to finished goods.</div><div class="tag">MES</div></div>
-        <div class="module-row"><div class="idx">02</div><h4>Inventory / WMS-lite</h4><div class="desc">Stock that matches the floor, not just the ledger.</div><div class="tag">Inventory</div></div>
-        <div class="module-row"><div class="idx">03</div><h4>Supply Chain Visibility</h4><div class="desc">Track materials and orders from supplier to shop floor.</div><div class="tag">Visibility</div></div>
-        <div class="module-row"><div class="idx">04</div><h4>Quality Management &amp; Traceability</h4><div class="desc">Trace a defect back to its batch, stage, and operator.</div><div class="tag">Quality</div></div>
-        <div class="module-row"><div class="idx">05</div><h4>Maintenance / CMMS-lite</h4><div class="desc">Planned maintenance and downtime records tied to equipment.</div><div class="tag">Maintenance</div></div>
-        <div class="module-row"><div class="idx">06</div><h4>Procurement &amp; Demand Planning</h4><div class="desc">Order what you'll need, when you'll need it — not by guesswork.</div><div class="tag">Procurement</div></div>
-        <div class="module-row"><div class="idx">07</div><h4>Financial &amp; Ops Backend</h4><div class="desc">The operational numbers that actually feed your books.</div><div class="tag">Finance</div></div>
+        <div class="module-row" data-expandable><div class="idx">01</div><h4>Manufacturing Execution System</h4><div class="desc">Stage-by-stage production tracking, from raw material to finished goods.</div><div class="tag">MES</div><span class="expand-icon">+</span>
+          <div class="module-detail">Work-order flow, shift and floor status, and real-time production visibility. The anchor module for manufacturers — most builds start here.<div class="fit">Typically starts with: Fabricated Metals, Textiles &amp; Garments</div></div>
+        </div>
+        <div class="module-row" data-expandable><div class="idx">02</div><h4>Inventory / WMS-lite</h4><div class="desc">Stock that matches the floor, not just the ledger.</div><div class="tag">Inventory</div><span class="expand-icon">+</span>
+          <div class="module-detail">Stock levels, movement tracking, and reconciliation. The anchor module for warehouse and distribution buyers, and expiry/FIFO-aware where needed.<div class="fit">Typically starts with: Warehouse / Distribution / 3PL, Food &amp; Beverage</div></div>
+        </div>
+        <div class="module-row" data-expandable><div class="idx">03</div><h4>Supply Chain Visibility</h4><div class="desc">Track materials and orders from supplier to shop floor.</div><div class="tag">Visibility</div><span class="expand-icon">+</span>
+          <div class="module-detail">Order-to-delivery tracking across suppliers and distributors — including visibility into subcontracted work.<div class="fit">Typically starts with: Textiles &amp; Garments, Warehouse / 3PL</div></div>
+        </div>
+        <div class="module-row" data-expandable><div class="idx">04</div><h4>Quality Management &amp; Traceability</h4><div class="desc">Trace a defect back to its batch, stage, and operator.</div><div class="tag">Quality</div><span class="expand-icon">+</span>
+          <div class="module-detail">Batch/lot tracking, QC data capture, and audit-ready batch records. Often a hard requirement, not an optional upgrade.<div class="fit">Typically starts with: Pharma &amp; Plastics-Packaging, Food &amp; Beverage</div></div>
+        </div>
+        <div class="module-row" data-expandable><div class="idx">05</div><h4>Maintenance / CMMS-lite</h4><div class="desc">Planned maintenance and downtime records tied to equipment.</div><div class="tag">Maintenance</div><span class="expand-icon">+</span>
+          <div class="module-detail">Equipment register, preventive maintenance scheduling, and breakdown/downtime logging tied back into production data.<div class="fit">Typically starts with: Fabricated Metals</div></div>
+        </div>
+        <div class="module-row" data-expandable><div class="idx">06</div><h4>Procurement &amp; Demand Planning</h4><div class="desc">Order what you'll need, when you'll need it — not by guesswork.</div><div class="tag">Procurement</div><span class="expand-icon">+</span>
+          <div class="module-detail">Requisition-to-PO workflow with basic reorder-point planning and supplier lead-time tracking. Deliberately lightweight — not full MRP.<div class="fit">Added once the core production or inventory system is in place</div></div>
+        </div>
+        <div class="module-row" data-expandable><div class="idx">07</div><h4>Financial &amp; Ops Backend</h4><div class="desc">The operational numbers that actually feed your books.</div><div class="tag">Finance</div><span class="expand-icon">+</span>
+          <div class="module-detail">Billing, reconciliation, and batch-level costing where relevant — the operational numbers that feed directly into your financials.<div class="fit">Typically starts with: Pharma &amp; Plastics-Packaging, Warehouse / 3PL</div></div>
+        </div>
       </div>
     </div>
   </section>
@@ -148,13 +243,13 @@
         <div class="eyebrow">Who we build for</div>
         <h2>For manufacturers who need something between an enterprise ERP and a spreadsheet.</h2>
       </div>
-      <div class="sector-grid">
-        <a class="sector-card" href="fabricated-metals.html"><h4>Fabricated Metals</h4><p>Job costing and downtime tracking for make-to-order production.</p><div class="go">View sector page →</div></a>
-        <a class="sector-card" href="food-beverage.html"><h4>Food &amp; Beverage</h4><p>Batch traceability and inventory that respects expiry dates.</p><div class="go">View sector page →</div></a>
-        <a class="sector-card" href="textiles.html"><h4>Textiles &amp; Garments</h4><p>WIP visibility across cutting, sewing, finishing, and subcontracted work.</p><div class="go">View sector page →</div></a>
-        <a class="sector-card" href="pharma-plastics.html"><h4>Pharma &amp; Plastics-Packaging</h4><p>Traceability that holds up to your customers' requirements.</p><div class="go">View sector page →</div></a>
-        <a class="sector-card" href="warehouse.html"><h4>Warehouse / Distribution / 3PL</h4><p>Real-time visibility across receiving, storage, and fulfillment.</p><div class="go">View sector page →</div></a>
-        <a class="sector-card" href="contact.html"><h4>Not sure where you fit?</h4><p>Tell us how your floor works — we'll tell you where to start.</p><div class="go">Start the conversation →</div></a>
+      <div class="sector-grid" data-reveal-group>
+        <a class="sector-card glow-card" href="fabricated-metals.html" data-reveal><h4>Fabricated Metals</h4><p>Job costing and downtime tracking for make-to-order production.</p><div class="go">View sector page →</div></a>
+        <a class="sector-card glow-card" href="food-beverage.html" data-reveal><h4>Food &amp; Beverage</h4><p>Batch traceability and inventory that respects expiry dates.</p><div class="go">View sector page →</div></a>
+        <a class="sector-card glow-card" href="textiles.html" data-reveal><h4>Textiles &amp; Garments</h4><p>WIP visibility across cutting, sewing, finishing, and subcontracted work.</p><div class="go">View sector page →</div></a>
+        <a class="sector-card glow-card" href="pharma-plastics.html" data-reveal><h4>Pharma &amp; Plastics-Packaging</h4><p>Traceability that holds up to your customers' requirements.</p><div class="go">View sector page →</div></a>
+        <a class="sector-card glow-card" href="warehouse.html" data-reveal><h4>Warehouse / Distribution / 3PL</h4><p>Real-time visibility across receiving, storage, and fulfillment.</p><div class="go">View sector page →</div></a>
+        <a class="sector-card glow-card" href="contact.html" data-reveal><h4>Not sure where you fit?</h4><p>Tell us how your floor works — we'll tell you where to start.</p><div class="go">Start the conversation →</div></a>
       </div>
     </div>
   </section>
@@ -168,7 +263,7 @@
         <p style="color:rgba(255,255,255,.68);">Every project starts with understanding how your operation actually works — then building the system around it. Here's what that looks like in practice.</p>
       </div>
 
-      <div class="project-card">
+      <div class="project-card glow-card" data-reveal>
         <div class="project-card-inner">
           <div class="project-info">
             <div class="project-client">Delta Group</div>
@@ -180,12 +275,15 @@
               <span>MES</span>
               <span>Quality &amp; Traceability</span>
             </div>
+            <div style="margin-top:22px;">
+              <a href="delta-group.html" class="btn btn-ghost btn-arrow">Read the full case study</a>
+            </div>
           </div>
           <div class="project-stats-col">
-            <div class="project-stat"><div class="num">08</div><div class="lbl">production stages tracked end to end</div></div>
-            <div class="project-stat"><div class="num">4</div><div class="lbl">modules delivered in one integrated build</div></div>
-            <div class="project-stat"><div class="num">100%</div><div class="lbl">of stage handoffs now recorded digitally</div></div>
-            <div class="project-stat"><div class="num">0</div><div class="lbl">spreadsheets left in daily production</div></div>
+            <div class="project-stat"><div class="num" data-count-to="8" data-count-pad="2">00</div><div class="lbl">production stages tracked end to end</div></div>
+            <div class="project-stat"><div class="num" data-count-to="4">0</div><div class="lbl">modules delivered in one integrated build</div></div>
+            <div class="project-stat"><div class="num" data-count-to="100" data-count-suffix="%">0%</div><div class="lbl">of stage handoffs now recorded digitally</div></div>
+            <div class="project-stat"><div class="num" data-count-to="0">0</div><div class="lbl">spreadsheets left in daily production</div></div>
           </div>
         </div>
         <div class="project-stages">
@@ -244,6 +342,7 @@
       <div>
         <h5>Company</h5>
         <a href="about.html">About</a>
+        <a href="delta-group.html">Delta Group Case Study</a>
         <a href="contact.html">Contact</a>
       </div>
     </div>

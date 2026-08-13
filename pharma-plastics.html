@@ -13,6 +13,7 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-nav">
+  <div class="scroll-progress"></div>
   <div class="wrap">
     <a href="index.html" class="wordmark"><b>tri</b><i>nova</i></a>
     <nav class="nav-links" id="nav-links">
@@ -57,16 +58,16 @@
 
   <section class="band-forest tight">
     <div class="wrap">
-      <div class="pain-grid">
-        <div class="pain-card" style="background:rgba(255,255,255,.1);border-left-color:var(--mint);">
+      <div class="pain-grid" data-reveal-group>
+        <div class="pain-card glow-card" style="background:rgba(255,255,255,.1);border-left-color:var(--mint);" data-reveal>
           <h4 style="color:var(--paper);">Batch record assembly</h4>
           <p style="color:rgba(255,255,255,.78);">Can't produce a full batch record on demand — audits mean days of paper assembly, not a single query.</p>
         </div>
-        <div class="pain-card" style="background:rgba(255,255,255,.1);border-left-color:var(--mint);">
+        <div class="pain-card glow-card" style="background:rgba(255,255,255,.1);border-left-color:var(--mint);" data-reveal>
           <h4 style="color:var(--paper);">Raw material lot gaps</h4>
           <p style="color:rgba(255,255,255,.78);">Traceability breaks between the incoming lot and the finished product — fine until it isn't.</p>
         </div>
-        <div class="pain-card" style="background:rgba(255,255,255,.1);border-left-color:var(--mint);">
+        <div class="pain-card glow-card" style="background:rgba(255,255,255,.1);border-left-color:var(--mint);" data-reveal>
           <h4 style="color:var(--paper);">Disconnected QC data</h4>
           <p style="color:rgba(255,255,255,.78);">Quality checks live in separate paper forms per shift — not linked to the batch, the operator, or the stage.</p>
         </div>
@@ -80,10 +81,10 @@
         <div class="eyebrow">Where we typically start</div>
         <h2>Enter through the module that hurts most — expand from there.</h2>
       </div>
-      <div class="module-list">
-        <div class="module-row"><div class="idx">01</div><h4>Quality Management &amp; Traceability</h4><div class="desc">Batch/lot tracking, QC data capture, audit-ready batch records — the hard requirement for this sector.</div><div class="tag">Quality</div></div>
-        <div class="module-row"><div class="idx">02</div><h4>Financial &amp; Ops Backend</h4><div class="desc">Batch-level costing — often a contractual requirement, not just an internal metric.</div><div class="tag">Finance</div></div>
-        <div class="module-row"><div class="idx">03</div><h4>Manufacturing Execution System</h4><div class="desc">Production stage tracking with operator and timestamp data feeding directly into batch records.</div><div class="tag">MES</div></div>
+      <div class="module-list" data-reveal-group>
+        <div class="module-row" data-reveal><div class="idx">01</div><h4>Quality Management &amp; Traceability</h4><div class="desc">Batch/lot tracking, QC data capture, audit-ready batch records — the hard requirement for this sector.</div><div class="tag">Quality</div></div>
+        <div class="module-row" data-reveal><div class="idx">02</div><h4>Financial &amp; Ops Backend</h4><div class="desc">Batch-level costing — often a contractual requirement, not just an internal metric.</div><div class="tag">Finance</div></div>
+        <div class="module-row" data-reveal><div class="idx">03</div><h4>Manufacturing Execution System</h4><div class="desc">Production stage tracking with operator and timestamp data feeding directly into batch records.</div><div class="tag">MES</div></div>
       </div>
       <p style="margin-top:24px;color:var(--slate);font-size:14.5px;"><strong>Important:</strong> Trinova builds the system that supports compliance documentation — we do not certify GMP compliance itself.</p>
     </div>
@@ -121,6 +122,7 @@
       <div>
         <h5>Company</h5>
         <a href="about.html">About</a>
+        <a href="delta-group.html">Delta Group Case Study</a>
         <a href="contact.html">Contact</a>
       </div>
     </div>

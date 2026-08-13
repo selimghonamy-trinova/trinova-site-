@@ -13,6 +13,7 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-nav">
+  <div class="scroll-progress"></div>
   <div class="wrap">
     <a href="index.html" class="wordmark"><b>tri</b><i>nova</i></a>
     <nav class="nav-links" id="nav-links">
@@ -57,16 +58,16 @@
 
   <section class="band-forest tight">
     <div class="wrap">
-      <div class="pain-grid">
-        <div class="pain-card" style="background:rgba(255,255,255,.1);border-left-color:var(--mint);">
+      <div class="pain-grid" data-reveal-group>
+        <div class="pain-card glow-card" style="background:rgba(255,255,255,.1);border-left-color:var(--mint);" data-reveal>
           <h4 style="color:var(--paper);">Job costing blind spots</h4>
           <p style="color:rgba(255,255,255,.78);">Material, machine time, and rework are rarely tied back to the job that used them — true cost is unknown until well after delivery.</p>
         </div>
-        <div class="pain-card" style="background:rgba(255,255,255,.1);border-left-color:var(--mint);">
+        <div class="pain-card glow-card" style="background:rgba(255,255,255,.1);border-left-color:var(--mint);" data-reveal>
           <h4 style="color:var(--paper);">Unplanned downtime</h4>
           <p style="color:rgba(255,255,255,.78);">No preventive schedule, no breakdown log — "the line was down" is as much detail as anyone gets.</p>
         </div>
-        <div class="pain-card" style="background:rgba(255,255,255,.1);border-left-color:var(--mint);">
+        <div class="pain-card glow-card" style="background:rgba(255,255,255,.1);border-left-color:var(--mint);" data-reveal>
           <h4 style="color:var(--paper);">Raw material shrinkage</h4>
           <p style="color:rgba(255,255,255,.78);">Sheet metal, bar stock, and alloys go untracked between the storeroom and the shop floor until the next stock-take.</p>
         </div>
@@ -80,10 +81,10 @@
         <div class="eyebrow">Where we typically start</div>
         <h2>Enter through the module that hurts most — expand from there.</h2>
       </div>
-      <div class="module-list">
-        <div class="module-row"><div class="idx">01</div><h4>Manufacturing Execution System</h4><div class="desc">Track a job through every stage — cutting, forming, welding, finishing — with real cost and time at each step.</div><div class="tag">MES</div></div>
-        <div class="module-row"><div class="idx">02</div><h4>Maintenance / CMMS-lite</h4><div class="desc">Log downtime the moment it happens, with a cause — turning "the line was down" into a record you can act on.</div><div class="tag">Maintenance</div></div>
-        <div class="module-row"><div class="idx">03</div><h4>Inventory / WMS-lite</h4><div class="desc">Track sheet, bar stock, and alloy from the storeroom to the job that consumed it.</div><div class="tag">Inventory</div></div>
+      <div class="module-list" data-reveal-group>
+        <div class="module-row" data-reveal><div class="idx">01</div><h4>Manufacturing Execution System</h4><div class="desc">Track a job through every stage — cutting, forming, welding, finishing — with real cost and time at each step.</div><div class="tag">MES</div></div>
+        <div class="module-row" data-reveal><div class="idx">02</div><h4>Maintenance / CMMS-lite</h4><div class="desc">Log downtime the moment it happens, with a cause — turning "the line was down" into a record you can act on.</div><div class="tag">Maintenance</div></div>
+        <div class="module-row" data-reveal><div class="idx">03</div><h4>Inventory / WMS-lite</h4><div class="desc">Track sheet, bar stock, and alloy from the storeroom to the job that consumed it.</div><div class="tag">Inventory</div></div>
       </div>
       <p style="margin-top:24px;color:var(--slate);font-size:14.5px;"><strong>Framing metric:</strong> OEE (Overall Equipment Effectiveness) — we build the system that makes the number real, not estimated.</p>
     </div>
@@ -96,7 +97,7 @@
         <h2 style="font-size:24px;color:var(--paper);">Delta Group — Wire Harness Manufacturing</h2>
         <p style="color:rgba(255,255,255,.68);margin-top:12px;max-width:50ch;">An 8-stage production system covering purchasing, receiving, warehouse management, production planning, and full traceability — live in production on a make-to-order fabrication floor.</p>
       </div>
-      <a href="index.html#projects" class="btn btn-ghost btn-arrow">See the project</a>
+      <a href="delta-group.html" class="btn btn-ghost btn-arrow">Read the full case study</a>
     </div>
   </section>
 
@@ -132,6 +133,7 @@
       <div>
         <h5>Company</h5>
         <a href="about.html">About</a>
+        <a href="delta-group.html">Delta Group Case Study</a>
         <a href="contact.html">Contact</a>
       </div>
     </div>

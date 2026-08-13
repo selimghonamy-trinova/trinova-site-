@@ -13,6 +13,7 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-nav">
+  <div class="scroll-progress"></div>
   <div class="wrap">
     <a href="index.html" class="wordmark"><b>tri</b><i>nova</i></a>
     <nav class="nav-links" id="nav-links">
@@ -57,16 +58,16 @@
 
   <section class="band-forest tight">
     <div class="wrap">
-      <div class="pain-grid">
-        <div class="pain-card" style="background:rgba(255,255,255,.1);border-left-color:var(--mint);">
+      <div class="pain-grid" data-reveal-group>
+        <div class="pain-card glow-card" style="background:rgba(255,255,255,.1);border-left-color:var(--mint);" data-reveal>
           <h4 style="color:var(--paper);">Expiry blind spots</h4>
           <p style="color:rgba(255,255,255,.78);">Near-expiry and expired stock isn't flagged until the next physical count — FIFO is a policy on paper, not enforced in practice.</p>
         </div>
-        <div class="pain-card" style="background:rgba(255,255,255,.1);border-left-color:var(--mint);">
+        <div class="pain-card glow-card" style="background:rgba(255,255,255,.1);border-left-color:var(--mint);" data-reveal>
           <h4 style="color:var(--paper);">Traceability gaps</h4>
           <p style="color:rgba(255,255,255,.78);">Can't trace a contaminated or recalled batch back to its raw material lot — a serious liability for exporters and HACCP compliance.</p>
         </div>
-        <div class="pain-card" style="background:rgba(255,255,255,.1);border-left-color:var(--mint);">
+        <div class="pain-card glow-card" style="background:rgba(255,255,255,.1);border-left-color:var(--mint);" data-reveal>
           <h4 style="color:var(--paper);">Delayed production data</h4>
           <p style="color:rgba(255,255,255,.78);">Paper shift logs reach management a day late — decisions are made on yesterday's numbers, not today's reality.</p>
         </div>
@@ -80,10 +81,10 @@
         <div class="eyebrow">Where we typically start</div>
         <h2>Enter through the module that hurts most — expand from there.</h2>
       </div>
-      <div class="module-list">
-        <div class="module-row"><div class="idx">01</div><h4>Quality Management &amp; Traceability</h4><div class="desc">Batch/lot tracking and QC data capture — trace any product back to its raw material source on demand.</div><div class="tag">Quality</div></div>
-        <div class="module-row"><div class="idx">02</div><h4>Manufacturing Execution System</h4><div class="desc">Shift-level production visibility — output, waste, and downtime captured in real time, not on paper.</div><div class="tag">MES</div></div>
-        <div class="module-row"><div class="idx">03</div><h4>Inventory / WMS-lite</h4><div class="desc">FIFO/expiry-aware stock management — flag near-expiry material before it ships or spoils.</div><div class="tag">Inventory</div></div>
+      <div class="module-list" data-reveal-group>
+        <div class="module-row" data-reveal><div class="idx">01</div><h4>Quality Management &amp; Traceability</h4><div class="desc">Batch/lot tracking and QC data capture — trace any product back to its raw material source on demand.</div><div class="tag">Quality</div></div>
+        <div class="module-row" data-reveal><div class="idx">02</div><h4>Manufacturing Execution System</h4><div class="desc">Shift-level production visibility — output, waste, and downtime captured in real time, not on paper.</div><div class="tag">MES</div></div>
+        <div class="module-row" data-reveal><div class="idx">03</div><h4>Inventory / WMS-lite</h4><div class="desc">FIFO/expiry-aware stock management — flag near-expiry material before it ships or spoils.</div><div class="tag">Inventory</div></div>
       </div>
       <p style="margin-top:24px;color:var(--slate);font-size:14.5px;"><strong>Compliance frameworks:</strong> HACCP, ISO 22000, destination-market traceability for EU/GCC exporters.</p>
     </div>
@@ -121,6 +122,7 @@
       <div>
         <h5>Company</h5>
         <a href="about.html">About</a>
+        <a href="delta-group.html">Delta Group Case Study</a>
         <a href="contact.html">Contact</a>
       </div>
     </div>

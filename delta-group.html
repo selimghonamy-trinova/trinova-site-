@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delta Group Case Study — Trinova</title>
+<meta name="description" content="How Trinova built an 8-stage production system for Delta Group, a wire harness manufacturer — from purchase orders to finished-goods traceability.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-nav">
+  <div class="scroll-progress"></div>
+  <div class="wrap">
+    <a href="index.html" class="wordmark"><b>tri</b><i>nova</i></a>
+    <nav class="nav-links" id="nav-links">
+      <div class="has-dropdown">
+        <a href="index.html#sectors">Sectors</a>
+        <div class="dropdown">
+          <a href="fabricated-metals.html">Fabricated Metals</a>
+          <a href="food-beverage.html">Food &amp; Beverage</a>
+          <a href="textiles.html">Textiles &amp; Garments</a>
+          <a href="pharma-plastics.html">Pharma &amp; Plastics-Packaging</a>
+          <a href="warehouse.html">Warehouse / Distribution / 3PL</a>
+        </div>
+      </div>
+      <a href="index.html#modules">What we build</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="nav-cta">Talk to us</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<main id="main">
+
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="index.html">Home</a> / <a href="index.html#projects">Projects</a> / Delta Group</div>
+      <h1>Delta Group — a full production system, built stage by stage.</h1>
+      <p class="sub">Delta Group is a wire harness manufacturer running make-to-order production. Trinova built the operational system that now runs their floor — from the first purchase order to the last traceability scan.</p>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="wrap two-col">
+      <div>
+        <div class="eyebrow">The starting point</div>
+        <h2 style="font-size:26px;">Production ran on notebooks, memory, and WhatsApp.</h2>
+      </div>
+      <p style="color:var(--slate);font-size:16px;">Before Trinova, Delta's production data lived in three places at once: a supervisor's notebook, a WhatsApp group for shift handoffs, and a set of spreadsheets that were only ever as current as the last time someone remembered to update them. Purchase orders were tracked on paper. Stock counts on the shelf and stock counts on record routinely disagreed. Tracing a finished harness carton back to the raw material batch it came from meant physically pulling paperwork — if it existed at all.</p>
+    </div>
+  </section>
+
+  <section class="band-forest tight" data-reveal-group>
+    <div class="wrap">
+      <div class="pain-grid">
+        <div class="pain-card" style="background:rgba(255,255,255,.1);border-left-color:var(--mint);" data-reveal>
+          <h4 style="color:var(--paper);">No live production visibility</h4>
+          <p style="color:rgba(255,255,255,.78);">Output numbers reached management a shift late, by word of mouth.</p>
+        </div>
+        <div class="pain-card" style="background:rgba(255,255,255,.1);border-left-color:var(--mint);" data-reveal>
+          <h4 style="color:var(--paper);">Stock that didn't reconcile</h4>
+          <p style="color:rgba(255,255,255,.78);">What was on the shelf and what was on paper only matched by coincidence.</p>
+        </div>
+        <div class="pain-card" style="background:rgba(255,255,255,.1);border-left-color:var(--mint);" data-reveal>
+          <h4 style="color:var(--paper);">No traceability</h4>
+          <p style="color:rgba(255,255,255,.78);">A finished carton couldn't be traced back to its raw material batch without a manual search.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">What we built</div>
+        <h2>An 8-stage system, purchasing through traceability.</h2>
+        <p>Each stage below is a real, distinct part of the deployed system — not a mockup. Screenshots of the live interface are available on request as part of a client walkthrough.</p>
+      </div>
+      <div class="stage-gallery" data-reveal-group>
+        <div class="stage-frame" data-reveal><span class="frame-num">01</span><div class="frame-diagram"><div class="tick-bar on-light" style="max-width:70%;"><span></span><span></span></div></div><div class="frame-label">Purchase Orders — multi-part POs from one supplier</div></div>
+        <div class="stage-frame" data-reveal><span class="frame-num">02</span><div class="frame-diagram"><div class="tick-bar on-light" style="max-width:70%;"><span></span><span></span><span></span></div></div><div class="frame-label">Receiving — confirm quantities, printable per-box QR labels</div></div>
+        <div class="stage-frame" data-reveal><span class="frame-num">03</span><div class="frame-diagram"><div class="tick-bar on-light" style="max-width:70%;"><span></span><span></span><span></span><span></span></div></div><div class="frame-label">Putaway — single box scan, auto-assigned bin</div></div>
+        <div class="stage-frame" data-reveal><span class="frame-num">04</span><div class="frame-diagram"><div class="tick-bar on-light" style="max-width:70%;"><span></span><span></span><span></span><span></span><span></span></div></div><div class="frame-label">Weekly Plan — target-quantity input, auto-scheduled</div></div>
+        <div class="stage-frame" data-reveal><span class="frame-num">05</span><div class="frame-diagram"><div class="tick-bar on-light" style="max-width:70%;"><span></span><span></span><span></span><span></span><span></span><span></span></div></div><div class="frame-label">WIP Transfer — two-step scan, live parts-in-WIP dashboard</div></div>
+        <div class="stage-frame" data-reveal><span class="frame-num">06</span><div class="frame-diagram"><div class="tick-bar on-light" style="max-width:70%;"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div><div class="frame-label">Production — WIP consumption, printable parent-product QR label</div></div>
+        <div class="stage-frame" data-reveal><span class="frame-num">07</span><div class="frame-diagram"><div class="tick-bar on-light active" style="max-width:70%;"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div><div class="frame-label">Finished Goods — scanning a carton reveals harness count inside</div></div>
+        <div class="stage-frame" data-reveal><span class="frame-num">08</span><div class="frame-diagram"><div class="tick-bar on-light active" data-animate style="max-width:70%;"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div><div class="frame-label">Traceability — full chain from raw material to finished carton</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band-deep">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Solutions delivered</div>
+        <h2>Four Trinova modules, one integrated build.</h2>
+        <p style="color:rgba(255,255,255,.68);">Delta is Trinova's only full-range build to date. Most clients start with one or two modules — Delta's scope grew because the same underlying architecture supported all four without being rebuilt from zero.</p>
+      </div>
+      <div class="project-stats-col stats-4up" data-reveal-group>
+        <div class="project-stat" data-reveal><div class="num" data-count-to="8" data-count-pad="2">00</div><div class="lbl">Supply Chain Visibility — Purchase Orders</div></div>
+        <div class="project-stat" data-reveal><div class="num" data-count-to="4">0</div><div class="lbl">Inventory/WMS-lite — Receiving, Putaway, Finished Goods</div></div>
+        <div class="project-stat" data-reveal><div class="num" data-count-to="100" data-count-suffix="%">0%</div><div class="lbl">MES — Weekly Plan, WIP Transfer, Production</div></div>
+        <div class="project-stat" data-reveal><div class="num" data-count-to="0">0</div><div class="lbl">Quality &amp; Traceability — full batch-to-carton chain</div></div>
+      </div>
+      <p style="margin-top:28px;color:rgba(255,255,255,.5);font-size:13px;font-family:var(--font-mono);">Stats above illustrate module count and stage count, not independently audited figures.</p>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="wrap two-col">
+      <div>
+        <div class="eyebrow">Status</div>
+        <h2 style="font-size:26px;">In active deployment.</h2>
+      </div>
+      <p style="color:var(--slate);font-size:16px;">The system is live and in daily use on Delta's production floor. Per our agreement with Delta, further client-specific details — production volumes, timelines, and named contacts — remain confidential until Delta signs off on additional disclosure.</p>
+    </div>
+  </section>
+
+  <section class="cta-band cta-green">
+    <div class="wrap">
+      <div><div class="eyebrow">Start here</div><h2>Want a system like this for your floor?</h2><p style="margin-top:14px;max-width:40ch;">Every build starts with a conversation about your process, not a fixed spec.</p></div>
+      <a href="contact.html" class="btn btn-primary btn-arrow">Start the conversation</a>
+    </div>
+  </section>
+
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="index.html" class="wordmark"><b>tri</b><i>nova</i></a>
+        <p style="margin-top:14px;color:rgba(255,255,255,.55);font-size:14px;max-width:30ch;">Industrial operational technology solutions for Egyptian manufacturers and warehouse/distribution operators.</p>
+      </div>
+      <div>
+        <h5>Product</h5>
+        <a href="index.html#modules">What we build</a>
+        <a href="index.html#projects">Projects</a>
+        <a href="index.html#sectors">Sectors</a>
+      </div>
+      <div>
+        <h5>Sectors</h5>
+        <a href="fabricated-metals.html">Fabricated Metals</a>
+        <a href="food-beverage.html">Food &amp; Beverage</a>
+        <a href="textiles.html">Textiles &amp; Garments</a>
+        <a href="pharma-plastics.html">Pharma &amp; Plastics</a>
+        <a href="warehouse.html">Warehouse / 3PL</a>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <a href="about.html">About</a>
+        <a href="delta-group.html">Delta Group Case Study</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; <span data-year></span> Trinova. Industrial Operational Technology Solutions.</span>
+      <span>Cairo, Egypt</span>
+    </div>
+  </div>
+</footer>
+<script src="assets/site.js"></script>
+</body>
+</html>
