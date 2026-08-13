@@ -173,6 +173,85 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   /* ============================================================
+     Interactive demo — MES production board
+     ============================================================ */
+  var demoBoard = document.getElementById('demo-board');
+  if (demoBoard) {
+    var STAGE_NAMES = ['Cutting', 'Forming', 'Assembly', 'Quality check', 'Packing'];
+    var INITIAL_JOBS = [
+      { id: 'JOB-214', desc: 'Bracket assembly', stage: 0 },
+      { id: 'JOB-221', desc: 'Frame cut', stage: 0 },
+      { id: 'JOB-208', desc: 'Panel weld', stage: 1 },
+      { id: 'JOB-205', desc: 'Support arm', stage: 1 },
+      { id: 'JOB-199', desc: 'Housing unit', stage: 2 },
+      { id: 'JOB-217', desc: 'Base plate', stage: 3 }
+    ];
+    var jobs = [];
+
+    function cloneInitial() {
+      return INITIAL_JOBS.map(function (j) { return { id: j.id, desc: j.desc, stage: j.stage }; });
+    }
+
+    function renderBoard() {
+      var cols = demoBoard.querySelectorAll('.demo-col');
+      cols.forEach(function (col) {
+        var stageIdx = parseInt(col.getAttribute('data-stage'), 10);
+        var body = col.querySelector('.demo-col-body');
+        var countEl = col.querySelector('.demo-col-count');
+        var stageJobs = jobs.filter(function (j) { return j.stage === stageIdx; });
+        countEl.textContent = stageJobs.length;
+        body.innerHTML = '';
+        if (stageJobs.length === 0) {
+          var empty = document.createElement('div');
+          empty.className = 'demo-empty';
+          empty.textContent = 'No jobs at this stage';
+          body.appendChild(empty);
+          return;
+        }
+        stageJobs.forEach(function (job) {
+          var card = document.createElement('div');
+          card.className = 'demo-card';
+          var isLast = job.stage === STAGE_NAMES.length - 1;
+          card.innerHTML =
+            '<div class="job-id">' + job.id + '</div>' +
+            '<div class="job-desc">' + job.desc + '</div>' +
+            '<button type="button" data-job="' + job.id + '">' + (isLast ? 'Mark shipped' : 'Advance to ' + STAGE_NAMES[job.stage + 1] + ' →') + '</button>';
+          body.appendChild(card);
+        });
+      });
+    }
+
+    demoBoard.addEventListener('click', function (e) {
+      var btn = e.target.closest('button[data-job]');
+      if (!btn) return;
+      var jobId = btn.getAttribute('data-job');
+      var job = jobs.find(function (j) { return j.id === jobId; });
+      if (!job) return;
+      var card = btn.closest('.demo-card');
+      card.classList.add('moving');
+      setTimeout(function () {
+        if (job.stage === STAGE_NAMES.length - 1) {
+          jobs = jobs.filter(function (j) { return j.id !== jobId; });
+        } else {
+          job.stage += 1;
+        }
+        renderBoard();
+      }, 180);
+    });
+
+    var resetBtn = document.getElementById('demo-reset');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function () {
+        jobs = cloneInitial();
+        renderBoard();
+      });
+    }
+
+    jobs = cloneInitial();
+    renderBoard();
+  }
+
+  /* ============================================================
      TIER 2 — #6 Diagnostic tool
      ============================================================ */
   var diag = document.querySelector('.diagnostic');
