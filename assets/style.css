@@ -225,7 +225,7 @@ section.tight{padding:60px 0;}
    ============================================================ */
 .module-list{border-top:1px solid var(--hairline);}
 .module-row{
-  display:grid;grid-template-columns:56px 1.3fr 1.7fr auto 26px;gap:20px;align-items:center;
+  display:grid;grid-template-columns:56px 1.3fr 1.7fr 158px 26px;gap:20px;align-items:center;
   padding:22px 0;border-bottom:1px solid var(--hairline);
 }
 .module-row .idx{
