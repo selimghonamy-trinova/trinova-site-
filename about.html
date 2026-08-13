@@ -5,10 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About — Trinova</title>
 <meta name="description" content="Trinova is a small, technical team building operational systems for Egyptian manufacturers and warehouse/distribution operators.">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/icons/favicon-512.png">
+<link rel="apple-touch-icon" href="assets/icons/favicon-180.png">
+<link rel="canonical" href="https://trinovax.co/about.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Trinova">
+<meta property="og:title" content="About — Trinova">
+<meta property="og:description" content="Trinova is a team of professional engineers building tailored operational systems for Egyptian manufacturers and warehouse/distribution operators.">
+<meta property="og:url" content="https://trinovax.co/about.html">
+<meta property="og:image" content="https://trinovax.co/assets/og/trinova-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="About — Trinova">
+<meta name="twitter:description" content="Trinova is a team of professional engineers building tailored operational systems for Egyptian manufacturers and warehouse/distribution operators.">
+<meta name="twitter:image" content="https://trinovax.co/assets/og/trinova-og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=7">
+<link rel="stylesheet" href="assets/style.css?v=8">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -123,7 +139,28 @@
         <h2>One proven architecture. Customized for every client.</h2>
       </div>
       <p style="color:rgba(255,255,255,.72);font-size:16px;max-width:60ch;">Every Trinova system is built on a proven, battle-tested architecture — an append-only movements ledger where every physical event (a receipt, a transfer, a production step) is recorded once and never edited. Stock, WIP, and production counts are always derived from real data, not manually entered. This foundation means we can build fast without starting from zero — but every system we deliver is customized to the client, not a copy.</p>
-      <div class="tick-bar on-light" data-animate style="margin-top:28px;max-width:400px;">
+
+      <div class="ledger-flow" data-reveal-group>
+        <div class="ledger-step" data-reveal>
+          <span class="ledger-num">01</span>
+          <h4>An event happens</h4>
+          <p>A box is received, a job moves to the next stage, a unit ships — a real, physical action on the floor.</p>
+        </div>
+        <div class="ledger-arrow" aria-hidden="true">→</div>
+        <div class="ledger-step" data-reveal>
+          <span class="ledger-num">02</span>
+          <h4>It's logged once, permanently</h4>
+          <p>The event becomes a row in the movements ledger — timestamped, attributed, and never edited or deleted afterward.</p>
+        </div>
+        <div class="ledger-arrow" aria-hidden="true">→</div>
+        <div class="ledger-step" data-reveal>
+          <span class="ledger-num">03</span>
+          <h4>Every number is derived</h4>
+          <p>Stock levels, WIP, and production counts are calculated by summing the ledger — not manually entered, so they can't drift from reality.</p>
+        </div>
+      </div>
+
+      <div class="tick-bar on-light" data-animate style="margin-top:32px;max-width:400px;">
         <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
       </div>
     </div>
@@ -191,10 +228,10 @@
     </div>
     <div class="foot-bottom">
       <span>&copy; <span data-year></span> Trinova. Industrial Operational Technology Solutions.</span>
-      <span>Cairo, Egypt</span>
+      <span>Cairo, Egypt — 10th of Ramadan · 6th of October · Greater Cairo</span>
     </div>
   </div>
 </footer>
-<script src="assets/site.js?v=7"></script>
+<script src="assets/site.js?v=8"></script>
 </body>
 </html>
