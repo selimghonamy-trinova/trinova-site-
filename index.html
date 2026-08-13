@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=5">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -124,48 +124,55 @@
       </div>
       <div class="diagnostic" data-reveal>
         <div class="diagnostic-head">
+          <div class="diag-head-row">
+            <span class="diag-counter">Step 1 of 3</span>
+          </div>
           <div class="diag-progress"><span></span><span></span><span></span></div>
         </div>
-        <div class="diagnostic-body">
+        <div class="diagnostic-body" aria-live="polite">
 
           <div class="diag-step active" data-key="sector">
             <div class="diag-question">What does your operation run?</div>
-            <div class="diag-options">
-              <button class="diag-option" data-value="fabricated-metals">Fabricated metals / job-shop production</button>
-              <button class="diag-option" data-value="food-beverage">Food &amp; beverage production</button>
-              <button class="diag-option" data-value="textiles">Textiles &amp; garment manufacturing</button>
-              <button class="diag-option" data-value="pharma-plastics">Pharma or plastics-packaging</button>
-              <button class="diag-option" data-value="warehouse">Warehouse, distribution, or 3PL</button>
+            <div class="diag-options" role="group" aria-label="Sector">
+              <button type="button" class="diag-option" data-value="fabricated-metals">Fabricated metals / job-shop production</button>
+              <button type="button" class="diag-option" data-value="food-beverage">Food &amp; beverage production</button>
+              <button type="button" class="diag-option" data-value="textiles">Textiles &amp; garment manufacturing</button>
+              <button type="button" class="diag-option" data-value="pharma-plastics">Pharma or plastics-packaging</button>
+              <button type="button" class="diag-option" data-value="warehouse">Warehouse, distribution, or 3PL</button>
             </div>
           </div>
 
           <div class="diag-step" data-key="gap">
             <div class="diag-question">What's the biggest gap right now?</div>
-            <div class="diag-options">
-              <button class="diag-option" data-value="cost">We don't know real cost or output until later</button>
-              <button class="diag-option" data-value="stock">Stock on paper doesn't match the shelf</button>
-              <button class="diag-option" data-value="traceability">We can't trace a batch or defect back to its source</button>
-              <button class="diag-option" data-value="downtime">Equipment downtime has no record or pattern</button>
+            <div class="diag-options" role="group" aria-label="Biggest gap">
+              <button type="button" class="diag-option" data-value="cost">We don't know real cost or output until later</button>
+              <button type="button" class="diag-option" data-value="stock">Stock on paper doesn't match the shelf</button>
+              <button type="button" class="diag-option" data-value="traceability">We can't trace a batch or defect back to its source</button>
+              <button type="button" class="diag-option" data-value="downtime">Equipment downtime has no record or pattern</button>
             </div>
           </div>
 
           <div class="diag-step" data-key="size">
             <div class="diag-question">Roughly how many people work the floor?</div>
-            <div class="diag-options">
-              <button class="diag-option" data-value="small">Under 30</button>
-              <button class="diag-option" data-value="mid">30–150</button>
-              <button class="diag-option" data-value="large">150+</button>
-              <button class="diag-option" data-value="unsure">Not sure / varies</button>
+            <div class="diag-options" role="group" aria-label="Floor size">
+              <button type="button" class="diag-option" data-value="small">Under 30</button>
+              <button type="button" class="diag-option" data-value="mid">30–150</button>
+              <button type="button" class="diag-option" data-value="large">150+</button>
+              <button type="button" class="diag-option" data-value="unsure">Not sure / varies</button>
             </div>
           </div>
 
           <div class="diag-step diag-result">
             <div class="eyebrow">Your recommended starting point</div>
+            <div class="diag-recap"></div>
+            <span class="diag-result-tag">MODULE</span>
             <h3 class="diag-result-title">—</h3>
             <p class="diag-result-body">—</p>
-            <a href="#" class="btn btn-primary btn-arrow diag-result-link">See sector page</a>
-            <a href="contact.html" class="btn btn-ghost diag-result-contact">Talk to us about this</a>
-            <button class="diag-restart">Start over</button>
+            <div class="diag-result-actions">
+              <a href="#" class="btn btn-primary btn-arrow diag-result-link">See sector page</a>
+              <a href="contact.html" class="btn btn-ghost diag-result-contact">Talk to us about this</a>
+              <button type="button" class="diag-restart">Start over</button>
+            </div>
           </div>
 
         </div>
@@ -352,6 +359,6 @@
     </div>
   </div>
 </footer>
-<script src="assets/site.js"></script>
+<script src="assets/site.js?v=5"></script>
 </body>
 </html>

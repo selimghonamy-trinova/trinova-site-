@@ -183,22 +183,58 @@ document.addEventListener('DOMContentLoaded', function () {
     var totalQuestions = steps.length - 1; // last step is result
 
     function showStep(idx) {
-      steps.forEach(function (s, i) { s.classList.toggle('active', i === idx); });
+      steps.forEach(function (s, i) {
+        var active = i === idx;
+        s.classList.toggle('active', active);
+        // inline style as a hard fallback in case CSS hasn't applied (cache/load-order issues)
+        s.style.display = active ? '' : 'none';
+      });
       progressEls.forEach(function (p, i) { p.classList.toggle('done', i < idx); });
+      var counter = diag.querySelector('.diag-counter');
+      if (counter) {
+        counter.textContent = idx < totalQuestions
+          ? 'Step ' + (idx + 1) + ' of ' + totalQuestions
+          : 'Result';
+      }
+      diag.setAttribute('data-current-step', idx);
     }
+    // enforce correct initial visibility immediately, regardless of CSS load state
+    showStep(0);
+
+    var sectorLabels = {
+      'fabricated-metals': 'Fabricated Metals',
+      'food-beverage': 'Food & Beverage',
+      'textiles': 'Textiles & Garments',
+      'pharma-plastics': 'Pharma & Plastics-Packaging',
+      'warehouse': 'Warehouse / Distribution / 3PL'
+    };
+    var gapLabels = {
+      'cost': "Don't know real cost/output until later",
+      'stock': "Stock on paper doesn't match the shelf",
+      'traceability': "Can't trace a batch or defect to its source",
+      'downtime': 'Equipment downtime has no record'
+    };
+    var sizeLabels = { 'small': 'Under 30', 'mid': '30–150', 'large': '150+', 'unsure': 'Not sure / varies' };
 
     diag.querySelectorAll('.diag-option').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var step = btn.closest('.diag-step');
         var key = step.getAttribute('data-key');
         answers[key] = btn.getAttribute('data-value');
+
+        // brief selected-state flash before advancing
+        step.querySelectorAll('.diag-option').forEach(function (b) { b.classList.remove('selected'); });
+        btn.classList.add('selected');
+
         var currentIdx = Array.prototype.indexOf.call(steps, step);
-        if (currentIdx < totalQuestions - 1) {
-          showStep(currentIdx + 1);
-        } else {
-          renderResult();
-          showStep(steps.length - 1);
-        }
+        setTimeout(function () {
+          if (currentIdx < totalQuestions - 1) {
+            showStep(currentIdx + 1);
+          } else {
+            renderResult();
+            showStep(steps.length - 1);
+          }
+        }, 220);
       });
     });
 
@@ -215,22 +251,43 @@ document.addEventListener('DOMContentLoaded', function () {
       'traceability': 'Quality Management & Traceability',
       'downtime': 'Maintenance / CMMS-lite'
     };
+    var moduleTagMap = {
+      'Manufacturing Execution System': 'MES',
+      'Inventory / WMS-lite': 'Inventory',
+      'Quality Management & Traceability': 'Quality',
+      'Maintenance / CMMS-lite': 'Maintenance'
+    };
 
     function renderResult() {
       var sector = resultMap[answers.sector] || resultMap['fabricated-metals'];
       var module = gapModuleMap[answers.gap] || sector.module;
       var resultEl = diag.querySelector('.diag-result');
-      resultEl.querySelector('.diag-result-title').textContent = 'Start with ' + module + '.';
+
+      var recap = resultEl.querySelector('.diag-recap');
+      if (recap) {
+        recap.innerHTML =
+          '<span class="recap-pill">' + (sectorLabels[answers.sector] || sector.title) + '</span>' +
+          '<span class="recap-pill">' + (gapLabels[answers.gap] || 'Operational gap') + '</span>' +
+          '<span class="recap-pill">' + (sizeLabels[answers.size] || 'Floor size') + '</span>';
+      }
+
+      var tagEl = resultEl.querySelector('.diag-result-tag');
+      if (tagEl) tagEl.textContent = moduleTagMap[module] || module;
+
+      resultEl.querySelector('.diag-result-title').textContent = module;
       resultEl.querySelector('.diag-result-body').textContent =
         'Based on ' + sector.title + ' and the gap you flagged, ' + module + ' is typically the right entry point — it addresses that specific problem directly, and every other module connects to it as you grow.';
       resultEl.querySelector('.diag-result-link').setAttribute('href', sector.href);
       resultEl.querySelector('.diag-result-link').textContent = 'See ' + sector.title + ' →';
-      var mailBody = encodeURIComponent('Sector: ' + sector.title + '\nBiggest gap: ' + answers.gap + '\nFloor size: ' + answers.size + '\nRecommended entry point: ' + module);
       resultEl.querySelector('.diag-result-contact').setAttribute('href', 'contact.html');
     }
 
     diag.querySelectorAll('.diag-restart').forEach(function (btn) {
-      btn.addEventListener('click', function () { answers = {}; showStep(0); });
+      btn.addEventListener('click', function () {
+        answers = {};
+        diag.querySelectorAll('.diag-option.selected').forEach(function (b) { b.classList.remove('selected'); });
+        showStep(0);
+      });
     });
   }
 
