@@ -819,9 +819,13 @@ document.addEventListener('DOMContentLoaded', function () {
       'Maintenance / CMMS-lite': 'Maintenance'
     };
     var moduleDemoMap = {
-      'Manufacturing Execution System': 'mes',
-      'Inventory / WMS-lite': 'inventory',
-      'Quality Management & Traceability': 'quality'
+      'Manufacturing Execution System': 'mes.html',
+      'Inventory / WMS-lite': 'inventory.html',
+      'Supply Chain Visibility': 'supply-chain-visibility.html',
+      'Quality Management & Traceability': 'quality-traceability.html',
+      'Maintenance / CMMS-lite': 'maintenance.html',
+      'Procurement & Demand Planning': 'procurement.html',
+      'Financial & Ops Backend': 'financial-ops.html'
     };
 
     function renderResult() {
@@ -848,18 +852,12 @@ document.addEventListener('DOMContentLoaded', function () {
       resultEl.querySelector('.diag-result-contact').setAttribute('href', 'contact.html');
 
       var demoLink = resultEl.querySelector('.diag-result-demo');
-      var demoKey = moduleDemoMap[module];
+      var demoPage = moduleDemoMap[module];
       if (demoLink) {
-        if (demoKey) {
+        if (demoPage) {
           demoLink.style.display = '';
-          demoLink.onclick = function (e) {
-            e.preventDefault();
-            var demoSection = document.getElementById('demo');
-            if (demoSection) {
-              demoSection.scrollIntoView({ behavior: 'smooth' });
-              if (typeof activateDemoTab === 'function') activateDemoTab(demoKey);
-            }
-          };
+          demoLink.setAttribute('href', demoPage + '#module-demo');
+          demoLink.onclick = null;
         } else {
           demoLink.style.display = 'none';
         }
