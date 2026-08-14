@@ -427,6 +427,313 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /* ============================================================
+     Interactive demo — Supply Chain Visibility (order tracker)
+     ============================================================ */
+  var scvBoard = document.getElementById('scv-board');
+  if (scvBoard) {
+    var SCV_STAGES = ['Ordered', 'Shipped by supplier', 'Received at warehouse', 'Issued to production'];
+    var SCV_INITIAL = [
+      { id: 'PO-3301', desc: 'Steel coil — 2 tons', stage: 0 },
+      { id: 'PO-3298', desc: 'Connector housings ×500', stage: 1 },
+      { id: 'PO-3290', desc: 'Packaging cartons ×2,000', stage: 1 },
+      { id: 'PO-3287', desc: 'Aluminum bar stock', stage: 2 }
+    ];
+    var scvOrders = [];
+
+    function scvClone() {
+      return SCV_INITIAL.map(function (o) { return { id: o.id, desc: o.desc, stage: o.stage }; });
+    }
+
+    function renderScv() {
+      var cols = scvBoard.querySelectorAll('.demo-col');
+      cols.forEach(function (col) {
+        var stageIdx = parseInt(col.getAttribute('data-stage'), 10);
+        var body = col.querySelector('.demo-col-body');
+        var countEl = col.querySelector('.demo-col-count');
+        var stageOrders = scvOrders.filter(function (o) { return o.stage === stageIdx; });
+        countEl.textContent = stageOrders.length;
+        body.innerHTML = '';
+        if (stageOrders.length === 0) {
+          var empty = document.createElement('div');
+          empty.className = 'demo-empty';
+          empty.textContent = 'No orders at this stage';
+          body.appendChild(empty);
+          return;
+        }
+        stageOrders.forEach(function (order) {
+          var card = document.createElement('div');
+          card.className = 'demo-card';
+          var isLast = order.stage === SCV_STAGES.length - 1;
+          card.innerHTML =
+            '<div class="job-id">' + order.id + '</div>' +
+            '<div class="job-desc">' + order.desc + '</div>' +
+            (isLast ? '' : '<button type="button" data-order="' + order.id + '">Advance to ' + SCV_STAGES[order.stage + 1] + ' →</button>');
+          body.appendChild(card);
+        });
+      });
+    }
+
+    scvBoard.addEventListener('click', function (e) {
+      var btn = e.target.closest('button[data-order]');
+      if (!btn) return;
+      var orderId = btn.getAttribute('data-order');
+      var order = scvOrders.find(function (o) { return o.id === orderId; });
+      if (!order) return;
+      var card = btn.closest('.demo-card');
+      card.classList.add('moving');
+      setTimeout(function () {
+        order.stage += 1;
+        renderScv();
+      }, 180);
+    });
+
+    var scvReset = document.getElementById('scv-demo-reset');
+    if (scvReset) {
+      scvReset.addEventListener('click', function () {
+        scvOrders = scvClone();
+        renderScv();
+      });
+    }
+
+    scvOrders = scvClone();
+    renderScv();
+  }
+
+  /* ============================================================
+     Interactive demo — Maintenance / CMMS-lite
+     ============================================================ */
+  var maintList = document.getElementById('maint-equip-list');
+  if (maintList) {
+    var MAINT_INITIAL = [
+      { code: 'EQ-01', name: 'CNC Press #1', status: 'running' },
+      { code: 'EQ-02', name: 'Welding Station B', status: 'running' },
+      { code: 'EQ-03', name: 'Forming Line 2', status: 'down' },
+      { code: 'EQ-04', name: 'Packing Conveyor', status: 'running' }
+    ];
+    var maintEquip = [];
+    var maintLog = [];
+    var maintDownReasons = ['Mechanical failure', 'Electrical fault', 'Scheduled maintenance'];
+
+    function maintClone() {
+      return MAINT_INITIAL.map(function (m) { return { code: m.code, name: m.name, status: m.status }; });
+    }
+
+    function maintTimestamp() {
+      return new Date().toTimeString().slice(0, 8);
+    }
+
+    function renderMaint() {
+      maintList.innerHTML = '';
+      maintEquip.forEach(function (eq) {
+        var row = document.createElement('div');
+        row.className = 'inv-row';
+        var badge = eq.status === 'running'
+          ? '<span class="status-badge status-running">RUNNING</span>'
+          : '<span class="status-badge status-down">DOWN</span>';
+        var action = eq.status === 'running'
+          ? '<button type="button" data-action="report" data-code="' + eq.code + '">Report downtime</button>'
+          : '<button type="button" data-action="resolve" data-code="' + eq.code + '">Mark resolved</button>';
+        row.innerHTML =
+          '<div class="sku-name">' + eq.name + '<span class="sku-code">' + eq.code + '</span></div>' +
+          '<div>' + badge + '</div>' +
+          '<div class="inv-actions">' + action + '</div>';
+        maintList.appendChild(row);
+      });
+
+      var logList = document.getElementById('maint-log-list');
+      if (maintLog.length === 0) {
+        logList.innerHTML = '<div class="inv-ledger-empty">No downtime events yet — try reporting one.</div>';
+      } else {
+        logList.innerHTML = maintLog.map(function (entry) {
+          return '<div class="inv-ledger-entry"><span class="lt">' + entry.time + '</span><span class="lm">' + entry.msg + '</span></div>';
+        }).join('');
+      }
+    }
+
+    maintList.addEventListener('click', function (e) {
+      var btn = e.target.closest('button[data-action]');
+      if (!btn) return;
+      var code = btn.getAttribute('data-code');
+      var action = btn.getAttribute('data-action');
+      var eq = maintEquip.find(function (m) { return m.code === code; });
+      if (!eq) return;
+      if (action === 'report') {
+        var reason = maintDownReasons[Math.floor(Math.random() * maintDownReasons.length)];
+        eq.status = 'down';
+        maintLog.push({ time: maintTimestamp(), msg: eq.code + ' reported down — ' + reason });
+      } else {
+        eq.status = 'running';
+        maintLog.push({ time: maintTimestamp(), msg: eq.code + ' marked resolved — back in production' });
+      }
+      if (maintLog.length > 12) maintLog.shift();
+      renderMaint();
+    });
+
+    var maintReset = document.getElementById('maint-demo-reset');
+    if (maintReset) {
+      maintReset.addEventListener('click', function () {
+        maintEquip = maintClone();
+        maintLog = [];
+        renderMaint();
+      });
+    }
+
+    maintEquip = maintClone();
+    renderMaint();
+  }
+
+  /* ============================================================
+     Interactive demo — Procurement & Demand Planning
+     ============================================================ */
+  var procList = document.getElementById('proc-material-list');
+  if (procList) {
+    var PROC_INITIAL = [
+      { code: 'MAT-101', name: 'Steel coil, 2mm', stock: 60, reorder: 40 },
+      { code: 'MAT-204', name: 'Bar stock, 12mm', stock: 55, reorder: 30 },
+      { code: 'MAT-317', name: 'Connector housing', stock: 45, reorder: 35 }
+    ];
+    var procMaterials = [];
+    var procDraftPOs = [];
+
+    function procClone() {
+      return PROC_INITIAL.map(function (m) { return { code: m.code, name: m.name, stock: m.stock, reorder: m.reorder }; });
+    }
+
+    function renderProc() {
+      procList.innerHTML = '';
+      procMaterials.forEach(function (mat) {
+        var row = document.createElement('div');
+        row.className = 'inv-row';
+        var below = mat.stock <= mat.reorder;
+        row.innerHTML =
+          '<div class="sku-name">' + mat.name + '<span class="sku-code">' + mat.code + '</span></div>' +
+          '<div class="' + (below ? 'qty below' : 'qty') + '">' + mat.stock + '<span class="threshold-note">reorder at ' + mat.reorder + '</span></div>' +
+          '<div class="inv-actions">' +
+            '<button type="button" data-action="consume" data-code="' + mat.code + '">Simulate consumption (-15)</button>' +
+            '<button type="button" class="po-suggest' + (below ? ' show' : '') + '" data-action="create-po" data-code="' + mat.code + '">Create PO</button>' +
+          '</div>';
+        procList.appendChild(row);
+      });
+
+      var poList = document.getElementById('proc-po-list');
+      if (procDraftPOs.length === 0) {
+        poList.innerHTML = '<div class="inv-ledger-empty">No draft purchase orders yet.</div>';
+      } else {
+        poList.innerHTML = procDraftPOs.map(function (entry) {
+          return '<div class="inv-ledger-entry"><span class="lt">' + entry.time + '</span><span class="lm">' + entry.msg + '</span></div>';
+        }).join('');
+      }
+    }
+
+    procList.addEventListener('click', function (e) {
+      var btn = e.target.closest('button[data-action]');
+      if (!btn) return;
+      var code = btn.getAttribute('data-code');
+      var action = btn.getAttribute('data-action');
+      var mat = procMaterials.find(function (m) { return m.code === code; });
+      if (!mat) return;
+      if (action === 'consume') {
+        mat.stock = Math.max(0, mat.stock - 15);
+      } else if (action === 'create-po') {
+        procDraftPOs.push({
+          time: new Date().toTimeString().slice(0, 8),
+          msg: 'Draft PO created for ' + mat.code + ' — suggested order qty ' + (mat.reorder * 2 - mat.stock)
+        });
+        if (procDraftPOs.length > 12) procDraftPOs.shift();
+      }
+      renderProc();
+    });
+
+    var procReset = document.getElementById('proc-demo-reset');
+    if (procReset) {
+      procReset.addEventListener('click', function () {
+        procMaterials = procClone();
+        procDraftPOs = [];
+        renderProc();
+      });
+    }
+
+    procMaterials = procClone();
+    renderProc();
+  }
+
+  /* ============================================================
+     Interactive demo — Financial & Ops Backend (job cost breakdown)
+     ============================================================ */
+  var costChips = document.getElementById('cost-chips');
+  if (costChips) {
+    var COST_JOBS = {
+      'JOB-214': {
+        label: 'JOB-214 — Bracket assembly, 220 units',
+        lines: [
+          { label: 'Material (steel coil lot #SC-2291)', value: 'EGP 18,400' },
+          { label: 'Machine time (3.4 hrs × line rate)', value: 'EGP 5,100' },
+          { label: 'Labor (2 operators × shift rate)', value: 'EGP 3,200' },
+          { label: 'Rework (3 units)', value: 'EGP 240' }
+        ],
+        total: 'EGP 26,940'
+      },
+      'JOB-208': {
+        label: 'JOB-208 — Panel weld, 150 units',
+        lines: [
+          { label: 'Material (aluminum bar lot #AB-1187)', value: 'EGP 12,850' },
+          { label: 'Machine time (2.1 hrs × line rate)', value: 'EGP 3,150' },
+          { label: 'Labor (1 operator × shift rate)', value: 'EGP 1,600' },
+          { label: 'Rework (0 units)', value: 'EGP 0' }
+        ],
+        total: 'EGP 17,600'
+      },
+      'JOB-199': {
+        label: 'JOB-199 — Housing unit, 300 units',
+        lines: [
+          { label: 'Material (steel coil lot #SC-2304)', value: 'EGP 24,600' },
+          { label: 'Machine time (4.8 hrs × line rate)', value: 'EGP 7,200' },
+          { label: 'Labor (2 operators × shift rate)', value: 'EGP 3,200' },
+          { label: 'Rework (8 units)', value: 'EGP 640' }
+        ],
+        total: 'EGP 35,640'
+      }
+    };
+
+    var costResult = document.getElementById('cost-result');
+
+    function renderCostChips() {
+      costChips.innerHTML = Object.keys(COST_JOBS).map(function (id) {
+        return '<button type="button" class="trace-chip" data-job="' + id + '">' + id + '</button>';
+      }).join('');
+    }
+
+    function renderCost(jobId) {
+      var job = COST_JOBS[jobId];
+      if (!job) {
+        costResult.innerHTML = '<p class="trace-placeholder">Pick a job above to see its cost breakdown.</p>';
+        return;
+      }
+      var lines = job.lines.map(function (l) {
+        return '<div class="cost-line"><span class="cl-label">' + l.label + '</span><span class="cl-value">' + l.value + '</span></div>';
+      }).join('');
+      costResult.innerHTML =
+        '<div class="cost-panel" style="padding:0;">' +
+        '<div style="font-family:var(--font-mono);font-size:12px;color:var(--forest-teal);margin-bottom:10px;">' + job.label + '</div>' +
+        lines +
+        '<div class="cost-line total"><span class="cl-label">Total job cost</span><span class="cl-value">' + job.total + '</span></div>' +
+        '<div class="cost-reconciled">Every line above is pulled from production and inventory data — not entered by hand.</div>' +
+        '</div>';
+    }
+
+    costChips.addEventListener('click', function (e) {
+      var chip = e.target.closest('.trace-chip');
+      if (!chip) return;
+      costChips.querySelectorAll('.trace-chip').forEach(function (c) { c.classList.remove('active'); });
+      chip.classList.add('active');
+      renderCost(chip.getAttribute('data-job'));
+    });
+
+    renderCostChips();
+    costResult.innerHTML = '<p class="trace-placeholder">Pick a job above to see its cost breakdown.</p>';
+  }
+
+  /* ============================================================
      TIER 2 — #6 Diagnostic tool
      ============================================================ */
   var diag = document.querySelector('.diagnostic');
