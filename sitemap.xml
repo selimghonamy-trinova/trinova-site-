@@ -97,6 +97,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://trinovax.co/projects.html</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://trinovax.co/privacy.html</loc>
     <lastmod>2026-08-14</lastmod>
     <changefreq>yearly</changefreq>
