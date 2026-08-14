@@ -252,6 +252,181 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /* ============================================================
+     Demo tabs — switch between MES / Inventory / Quality demos
+     ============================================================ */
+  var demoTabs = document.querySelectorAll('.demo-tab');
+  var demoInstances = document.querySelectorAll('.demo-instance');
+  function activateDemoTab(name) {
+    demoTabs.forEach(function (t) {
+      var isActive = t.getAttribute('data-demo-tab') === name;
+      t.classList.toggle('active', isActive);
+      t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+    demoInstances.forEach(function (p) {
+      p.classList.toggle('active', p.getAttribute('data-demo-panel') === name);
+    });
+  }
+  demoTabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      activateDemoTab(tab.getAttribute('data-demo-tab'));
+    });
+  });
+
+  /* ============================================================
+     Interactive demo — Inventory / WMS-lite stock ledger
+     ============================================================ */
+  var invStockList = document.getElementById('inv-stock-list');
+  if (invStockList) {
+    var INV_INITIAL = [
+      { code: 'SKU-1042', name: 'Sheet metal, 2mm', qty: 84 },
+      { code: 'SKU-2210', name: 'Bar stock, 12mm', qty: 36 },
+      { code: 'SKU-3305', name: 'Connector housing', qty: 12 },
+      { code: 'SKU-4118', name: 'Finished carton — Type A', qty: 58 }
+    ];
+    var invStock = [];
+    var invLedger = [];
+
+    function invClone() {
+      return INV_INITIAL.map(function (s) { return { code: s.code, name: s.name, qty: s.qty }; });
+    }
+
+    function invTimestamp() {
+      var d = new Date();
+      return d.toTimeString().slice(0, 8);
+    }
+
+    function renderInv() {
+      invStockList.innerHTML = '';
+      invStock.forEach(function (item) {
+        var row = document.createElement('div');
+        row.className = 'inv-row';
+        var qtyClass = item.qty <= 15 ? 'qty low' : 'qty';
+        row.innerHTML =
+          '<div class="sku-name">' + item.name + '<span class="sku-code">' + item.code + '</span></div>' +
+          '<div class="' + qtyClass + '" data-code="' + item.code + '">' + item.qty + '</div>' +
+          '<div class="inv-actions">' +
+            '<button type="button" data-action="receive" data-code="' + item.code + '">+10 Receive</button>' +
+            '<button type="button" class="ship-btn" data-action="ship" data-code="' + item.code + '"' + (item.qty < 5 ? ' disabled' : '') + '>-5 Ship</button>' +
+          '</div>';
+        invStockList.appendChild(row);
+      });
+
+      var ledgerList = document.getElementById('inv-ledger-list');
+      if (invLedger.length === 0) {
+        ledgerList.innerHTML = '<div class="inv-ledger-empty">No movements yet — try receiving or shipping stock.</div>';
+      } else {
+        ledgerList.innerHTML = invLedger.map(function (entry) {
+          return '<div class="inv-ledger-entry"><span class="lt">' + entry.time + '</span><span class="lm">' + entry.msg + '</span></div>';
+        }).join('');
+      }
+    }
+
+    invStockList.addEventListener('click', function (e) {
+      var btn = e.target.closest('button[data-action]');
+      if (!btn || btn.disabled) return;
+      var code = btn.getAttribute('data-code');
+      var action = btn.getAttribute('data-action');
+      var item = invStock.find(function (s) { return s.code === code; });
+      if (!item) return;
+      var delta = action === 'receive' ? 10 : -5;
+      item.qty += delta;
+      invLedger.push({
+        time: invTimestamp(),
+        msg: (action === 'receive' ? 'Received 10 × ' : 'Shipped 5 × ') + item.code + ' — new balance ' + item.qty
+      });
+      if (invLedger.length > 12) invLedger.shift();
+      renderInv();
+      var qtyEl = document.querySelector('.qty[data-code="' + code + '"]');
+      if (qtyEl) {
+        qtyEl.classList.add('flash');
+        setTimeout(function () { qtyEl.classList.remove('flash'); }, 500);
+      }
+    });
+
+    var invReset = document.getElementById('inv-demo-reset');
+    if (invReset) {
+      invReset.addEventListener('click', function () {
+        invStock = invClone();
+        invLedger = [];
+        renderInv();
+      });
+    }
+
+    invStock = invClone();
+    renderInv();
+  }
+
+  /* ============================================================
+     Interactive demo — Quality & Traceability batch lookup
+     ============================================================ */
+  var traceChips = document.getElementById('trace-chips');
+  if (traceChips) {
+    var TRACE_BATCHES = {
+      'BATCH-A104': {
+        material: 'Steel coil lot #SC-2291',
+        path: [
+          { time: 'Day 1 · 08:12', title: 'Raw material received', detail: 'Steel coil lot #SC-2291 logged into inventory, supplier-verified.' },
+          { time: 'Day 1 · 14:40', title: 'Cutting', detail: 'Operator: A. Hassan — 220 units cut from this lot.' },
+          { time: 'Day 2 · 09:05', title: 'Forming', detail: 'Operator: M. Said — no rework flagged.' },
+          { time: 'Day 2 · 15:22', title: 'Quality check', detail: 'Passed — 3 units flagged for rework, isolated from batch.' },
+          { time: 'Day 3 · 10:00', title: 'Packed as BATCH-A104', detail: '217 units shipped as finished goods, traceable to source lot.' }
+        ]
+      },
+      'BATCH-B217': {
+        material: 'Aluminum bar lot #AB-1187',
+        path: [
+          { time: 'Day 1 · 07:50', title: 'Raw material received', detail: 'Aluminum bar lot #AB-1187 logged into inventory.' },
+          { time: 'Day 1 · 11:30', title: 'Cutting', detail: 'Operator: R. Naguib — 150 units cut from this lot.' },
+          { time: 'Day 2 · 08:15', title: 'Assembly', detail: 'Operator: S. Farid — combined with connector housing SKU-3305.' },
+          { time: 'Day 2 · 16:48', title: 'Quality check', detail: 'Passed — zero defects on this batch.' },
+          { time: 'Day 3 · 09:30', title: 'Packed as BATCH-B217', detail: '150 units shipped as finished goods, traceable to source lot.' }
+        ]
+      },
+      'BATCH-C330': {
+        material: 'Steel coil lot #SC-2304',
+        path: [
+          { time: 'Day 1 · 09:00', title: 'Raw material received', detail: 'Steel coil lot #SC-2304 logged into inventory.' },
+          { time: 'Day 1 · 13:10', title: 'Cutting', detail: 'Operator: A. Hassan — 300 units cut from this lot.' },
+          { time: 'Day 2 · 10:40', title: 'Forming', detail: 'Operator: M. Said — 8 units flagged for rework, isolated.' },
+          { time: 'Day 2 · 17:05', title: 'Quality check', detail: 'Failed on 8 units — root cause traced to this specific lot, not the full batch.' },
+          { time: 'Day 3 · 11:15', title: 'Packed as BATCH-C330', detail: '292 units shipped; 8 units held and traced back to lot #SC-2304 for review.' }
+        ]
+      }
+    };
+
+    var traceResult = document.getElementById('trace-result');
+
+    function renderTraceChips() {
+      traceChips.innerHTML = Object.keys(TRACE_BATCHES).map(function (id) {
+        return '<button type="button" class="trace-chip" data-batch="' + id + '">' + id + '</button>';
+      }).join('');
+    }
+
+    function renderTrace(batchId) {
+      var batch = TRACE_BATCHES[batchId];
+      if (!batch) {
+        traceResult.innerHTML = '<p class="trace-placeholder">Pick a batch above to see its full trace.</p>';
+        return;
+      }
+      var nodes = batch.path.map(function (node) {
+        return '<div class="trace-node"><div class="tn-time">' + node.time + '</div><div><div class="tn-title">' + node.title + '</div><div class="tn-detail">' + node.detail + '</div></div></div>';
+      }).join('');
+      traceResult.innerHTML = '<div class="trace-path">' + nodes + '</div>';
+    }
+
+    traceChips.addEventListener('click', function (e) {
+      var chip = e.target.closest('.trace-chip');
+      if (!chip) return;
+      traceChips.querySelectorAll('.trace-chip').forEach(function (c) { c.classList.remove('active'); });
+      chip.classList.add('active');
+      renderTrace(chip.getAttribute('data-batch'));
+    });
+
+    renderTraceChips();
+    traceResult.innerHTML = '<p class="trace-placeholder">Pick a batch above to see its full trace.</p>';
+  }
+
+  /* ============================================================
      TIER 2 — #6 Diagnostic tool
      ============================================================ */
   var diag = document.querySelector('.diagnostic');
@@ -336,6 +511,11 @@ document.addEventListener('DOMContentLoaded', function () {
       'Quality Management & Traceability': 'Quality',
       'Maintenance / CMMS-lite': 'Maintenance'
     };
+    var moduleDemoMap = {
+      'Manufacturing Execution System': 'mes',
+      'Inventory / WMS-lite': 'inventory',
+      'Quality Management & Traceability': 'quality'
+    };
 
     function renderResult() {
       var sector = resultMap[answers.sector] || resultMap['fabricated-metals'];
@@ -359,6 +539,24 @@ document.addEventListener('DOMContentLoaded', function () {
       resultEl.querySelector('.diag-result-link').setAttribute('href', sector.href);
       resultEl.querySelector('.diag-result-link').textContent = 'See ' + sector.title + ' →';
       resultEl.querySelector('.diag-result-contact').setAttribute('href', 'contact.html');
+
+      var demoLink = resultEl.querySelector('.diag-result-demo');
+      var demoKey = moduleDemoMap[module];
+      if (demoLink) {
+        if (demoKey) {
+          demoLink.style.display = '';
+          demoLink.onclick = function (e) {
+            e.preventDefault();
+            var demoSection = document.getElementById('demo');
+            if (demoSection) {
+              demoSection.scrollIntoView({ behavior: 'smooth' });
+              if (typeof activateDemoTab === 'function') activateDemoTab(demoKey);
+            }
+          };
+        } else {
+          demoLink.style.display = 'none';
+        }
+      }
     }
 
     diag.querySelectorAll('.diag-restart').forEach(function (btn) {

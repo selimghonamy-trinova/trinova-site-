@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=9">
+<link rel="stylesheet" href="assets/style.css?v=10">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -207,6 +207,7 @@
             <h3 class="diag-result-title">—</h3>
             <p class="diag-result-body">—</p>
             <div class="diag-result-actions">
+              <a href="#demo" class="btn btn-ghost diag-result-demo">Try the demo</a>
               <a href="#" class="btn btn-primary btn-arrow diag-result-link">See sector page</a>
               <a href="contact.html" class="btn btn-ghost diag-result-contact">Talk to us about this</a>
               <button type="button" class="diag-restart">Start over</button>
@@ -293,44 +294,90 @@
     </div>
   </section>
 
-  <!-- INTERACTIVE DEMO: MES -->
+  <!-- INTERACTIVE DEMOS -->
   <section id="demo" class="band-mist">
     <div class="wrap">
       <div class="section-head">
         <div class="eyebrow">See it in action</div>
-        <h2>A production board, not a spreadsheet.</h2>
-        <p>Click "Advance" on any job to move it through the stages — this is how work gets tracked in an MES build, stage by stage, in real time. This is an illustrative example, not the live Delta Factory interface.</p>
+        <h2>A system, not a spreadsheet.</h2>
+        <p>Three modules, interactive. These are illustrative examples built to show how the modules work — not the live Delta Factory interface.</p>
       </div>
 
-      <div class="demo-panel" data-reveal>
-        <div class="demo-toolbar">
-          <span class="demo-toolbar-label">MES — LIVE PRODUCTION BOARD (DEMO)</span>
-          <button type="button" class="demo-reset" id="demo-reset">Reset demo</button>
-        </div>
-        <div class="demo-board" id="demo-board">
-          <div class="demo-col" data-stage="0">
-            <div class="demo-col-head"><h5>CUTTING</h5><span class="demo-col-count">0</span></div>
-            <div class="demo-col-body"></div>
-          </div>
-          <div class="demo-col" data-stage="1">
-            <div class="demo-col-head"><h5>FORMING</h5><span class="demo-col-count">0</span></div>
-            <div class="demo-col-body"></div>
-          </div>
-          <div class="demo-col" data-stage="2">
-            <div class="demo-col-head"><h5>ASSEMBLY</h5><span class="demo-col-count">0</span></div>
-            <div class="demo-col-body"></div>
-          </div>
-          <div class="demo-col" data-stage="3">
-            <div class="demo-col-head"><h5>QUALITY CHECK</h5><span class="demo-col-count">0</span></div>
-            <div class="demo-col-body"></div>
-          </div>
-          <div class="demo-col" data-stage="4">
-            <div class="demo-col-head"><h5>PACKING</h5><span class="demo-col-count">0</span></div>
-            <div class="demo-col-body"></div>
-          </div>
-        </div>
-        <div class="demo-footnote">Every "Advance" click here is exactly the kind of event that becomes a permanent row in the movements ledger — timestamped, never edited, always traceable back to who moved it and when.</div>
+      <div class="demo-tabs" role="tablist">
+        <button type="button" class="demo-tab active" data-demo-tab="mes" role="tab" aria-selected="true">Production (MES)</button>
+        <button type="button" class="demo-tab" data-demo-tab="inventory" role="tab" aria-selected="false">Inventory / WMS-lite</button>
+        <button type="button" class="demo-tab" data-demo-tab="quality" role="tab" aria-selected="false">Quality &amp; Traceability</button>
       </div>
+
+      <!-- MES DEMO -->
+      <div class="demo-instance active" data-demo-panel="mes">
+        <div class="demo-panel" data-reveal>
+          <div class="demo-toolbar">
+            <span class="demo-toolbar-label">MES — LIVE PRODUCTION BOARD (DEMO)</span>
+            <button type="button" class="demo-reset" id="demo-reset">Reset demo</button>
+          </div>
+          <p class="demo-instructions">Click "Advance" on any job to move it through the stages — stage by stage, in real time.</p>
+          <div class="demo-board" id="demo-board">
+            <div class="demo-col" data-stage="0">
+              <div class="demo-col-head"><h5>CUTTING</h5><span class="demo-col-count">0</span></div>
+              <div class="demo-col-body"></div>
+            </div>
+            <div class="demo-col" data-stage="1">
+              <div class="demo-col-head"><h5>FORMING</h5><span class="demo-col-count">0</span></div>
+              <div class="demo-col-body"></div>
+            </div>
+            <div class="demo-col" data-stage="2">
+              <div class="demo-col-head"><h5>ASSEMBLY</h5><span class="demo-col-count">0</span></div>
+              <div class="demo-col-body"></div>
+            </div>
+            <div class="demo-col" data-stage="3">
+              <div class="demo-col-head"><h5>QUALITY CHECK</h5><span class="demo-col-count">0</span></div>
+              <div class="demo-col-body"></div>
+            </div>
+            <div class="demo-col" data-stage="4">
+              <div class="demo-col-head"><h5>PACKING</h5><span class="demo-col-count">0</span></div>
+              <div class="demo-col-body"></div>
+            </div>
+          </div>
+          <div class="demo-footnote">Every "Advance" click here is exactly the kind of event that becomes a permanent row in the movements ledger — timestamped, never edited, always traceable back to who moved it and when.</div>
+        </div>
+      </div>
+
+      <!-- INVENTORY DEMO -->
+      <div class="demo-instance" data-demo-panel="inventory">
+        <div class="demo-panel" data-reveal>
+          <div class="demo-toolbar">
+            <span class="demo-toolbar-label">INVENTORY / WMS-LITE — STOCK LEDGER (DEMO)</span>
+            <button type="button" class="demo-reset" id="inv-demo-reset">Reset demo</button>
+          </div>
+          <p class="demo-instructions">Stock here is never edited directly — every "Receive" or "Ship" click logs a movement, and the quantity shown is always the sum of the ledger below it.</p>
+          <div class="inv-demo-grid">
+            <div class="inv-stock-panel">
+              <div class="inv-stock-head">
+                <span>SKU</span><span>On hand</span><span>Actions</span>
+              </div>
+              <div id="inv-stock-list"></div>
+            </div>
+            <div class="inv-ledger-panel">
+              <div class="inv-ledger-head">Movements ledger</div>
+              <div id="inv-ledger-list" class="inv-ledger-list"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- QUALITY / TRACEABILITY DEMO -->
+      <div class="demo-instance" data-demo-panel="quality">
+        <div class="demo-panel" data-reveal>
+          <div class="demo-toolbar">
+            <span class="demo-toolbar-label">QUALITY &amp; TRACEABILITY — BATCH LOOKUP (DEMO)</span>
+          </div>
+          <p class="demo-instructions">Pick a batch to trace it back through every stage it passed through — down to the raw material lot and the operator who handled it.</p>
+          <div class="trace-chips" id="trace-chips"></div>
+          <div id="trace-result" class="trace-result"></div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -462,6 +509,7 @@
         <a href="about.html">About</a>
         <a href="delta-factory.html">Delta Factory Case Study</a>
         <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy</a>
       </div>
     </div>
     <div class="foot-bottom">
@@ -470,6 +518,6 @@
     </div>
   </div>
 </footer>
-<script src="assets/site.js?v=9"></script>
+<script src="assets/site.js?v=10"></script>
 </body>
 </html>
