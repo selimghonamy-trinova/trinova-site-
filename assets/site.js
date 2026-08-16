@@ -7,14 +7,35 @@ document.addEventListener('DOMContentLoaded', function () {
   var toggle = document.querySelector('.nav-toggle');
   var links = document.querySelector('.nav-links');
   if (toggle && links) {
+    function openNav() {
+      links.classList.add('open');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeNav() {
+      links.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.classList.remove('active');
+      document.body.style.overflow = '';
+    }
     toggle.addEventListener('click', function () {
-      links.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', links.classList.contains('open'));
+      links.classList.contains('open') ? closeNav() : openNav();
+    });
+    // close when a nav link is clicked
+    links.querySelectorAll('a:not(.has-dropdown > a)').forEach(function (a) {
+      a.addEventListener('click', function () {
+        if (window.innerWidth <= 768) closeNav();
+      });
+    });
+    // close on Escape
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeNav();
     });
   }
   document.querySelectorAll('.has-dropdown > a').forEach(function (a) {
     a.addEventListener('click', function (e) {
-      if (window.innerWidth <= 720) {
+      if (window.innerWidth <= 768) {
         e.preventDefault();
         a.parentElement.classList.toggle('open');
       }
